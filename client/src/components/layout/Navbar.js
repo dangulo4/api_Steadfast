@@ -21,6 +21,9 @@ const Navbar = ({ title, icon }) => {
     <Fragment>
       <li>Hello {user && user.name}</li>
       <li>
+        <a href='/search'>Search</a>
+      </li>
+      <li>
         <a onClick={onLogout} href='#!'>
           <i className='fas fa-sign-out-alt'></i>{' '}
           <span className='hide-sm'>Logout</span>
@@ -41,7 +44,7 @@ const Navbar = ({ title, icon }) => {
   );
 
   return (
-    <div className='navbar bg-primary'>
+    <div className='navbar bg-dark'>
       <h1>
         <i className={icon} /> {title}
       </h1>

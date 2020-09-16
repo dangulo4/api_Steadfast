@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
+import Search from './components/pages/Search';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Alerts from './components/layout/Alerts';
@@ -30,6 +31,7 @@ const App = () => {
                 <Alerts />
                 <Switch>
                   <PrivateRoute exact path='/' component={Home} />
+                  <Route exact path='/search' component={Search} />
                   <Route exact path='/about' component={About} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/login' component={Login} />
