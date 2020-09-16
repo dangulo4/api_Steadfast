@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://dangulo:dangulo123@steadfast.svvay.mongodb.net/<dbname>?retryWrites=true&w=majority",
+  "jwtSecret": "secret"
+}
