@@ -18,3 +18,8 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+
+// API Search Domain
+export const SEARCH_DOMAIN = 'SEARCH_DOMAIN';
+export const CLEAR_DOMAIN = 'CLEAR_DOMAIN';
+export const SET_LOADING = 'SET_LOADING';
