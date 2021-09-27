@@ -1,21 +1,22 @@
-import React, { Fragment, useContext } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import AuthContext from '../../context/auth/authContext';
-import ContactContext from '../../context/contact/contactContext';
+import React, { Fragment, useContext } from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import AuthContext from '../../context/auth/authContext'
+import ContactContext from '../../context/contact/contactContext'
+import defaultImage from '../assets/steadfast-logo_planet_200x200.png'
 
 const Navbar = ({ title, icon }) => {
   // Initialize Context
-  const authContext = useContext(AuthContext);
-  const contactContext = useContext(ContactContext);
+  const authContext = useContext(AuthContext)
+  const contactContext = useContext(ContactContext)
 
-  const { isAuthenticated, logout, user } = authContext;
-  const { clearContacts } = contactContext;
+  const { isAuthenticated, logout, user } = authContext
+  const { clearContacts } = contactContext
 
   const onLogout = () => {
-    logout();
-    clearContacts();
-  };
+    logout()
+    clearContacts()
+  }
 
   const authLinks = (
     <Fragment>
@@ -30,7 +31,7 @@ const Navbar = ({ title, icon }) => {
         </a>
       </li>
     </Fragment>
-  );
+  )
 
   const guestLinks = (
     <Fragment>
@@ -41,26 +42,25 @@ const Navbar = ({ title, icon }) => {
         <Link to='/login'>Login</Link>
       </li>
     </Fragment>
-  );
+  )
 
   return (
     <div className='navbar bg-dark'>
       <h1>
-        <i className={icon} /> {title}
+        <img src={icon} style={{ height: '100px', width: '100px' }} /> {title}
       </h1>
       <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
     </div>
-  );
-};
+  )
+}
 
-Navbar.propTpyes = {
+Navbar.propTypes = {
   title: PropTypes.string.isRequired,
-  icon: PropTypes.string,
-};
+  icon: PropTypes.object.isRequired,
+}
 
 Navbar.defaultProps = {
   title: 'Steadfast API',
-  icon: 'fas fa-id-card-alt',
-};
-
-export default Navbar;
+  icon: defaultImage,
+}
+export default Navbar

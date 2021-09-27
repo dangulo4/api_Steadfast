@@ -1,6 +1,6 @@
-import { createContext } from 'react';
+import { createContext } from 'react'
 
 // Initialize Context
-const apiContext = createContext();
+const apiContext = createContext()
 
-export default apiContext;
+export default apiContext

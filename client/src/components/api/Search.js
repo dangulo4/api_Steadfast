@@ -1,52 +1,44 @@
-import React, { useState, useContext, useEffect, Fragment } from 'react';
-import Spinner from '../layout/Spinner';
-import AlertContext from '../../context/alert/alertContext';
-import ApiContext from '../../context/api/apiContext';
-import AuthContext from '../../context/auth/authContext';
-import PropTypes from 'prop-types';
+import React, { useState, useContext, useEffect, Fragment } from 'react'
+import Spinner from '../layout/Spinner'
+import AuthContext from '../../context/auth/authContext'
+import ApiContext from '../../context/api/apiContext'
+import AlertContext from '../../context/alert/alertContext'
+// import { useParams, Link } from 'react-router-dom';
 
-const Search = (contact) => {
-  const authContext = useContext(AuthContext);
-  const apiContext = useContext(ApiContext);
-  const alertContext = useContext(AlertContext);
+const Search = () => {
+  const authContext = useContext(AuthContext)
+  const apiContext = useContext(ApiContext)
+  const alertContext = useContext(AlertContext)
+  const { loading, contacts, company } = apiContext
+  const [text, setText] = useState('')
 
-  const { loading, contacts } = apiContext;
+  const onSubmit = (e) => {
+    e.preventDefault()
+    if (text === '') {
+      alertContext.setAlert('Please enter a value', 'light')
+    } else {
+      apiContext.searchDomain(text)
+      apiContext.searchCompany(text)
+      setText('')
+    }
+  }
 
-  const {
-    value,
-    department,
-    first_name,
-    last_name,
-    position,
-    phone,
-  } = contacts;
+  const onChange = (e) => setText(e.target.value)
+
+  const { organization } = company
 
   // Run as soon as component loads
   useEffect(() => {
-    authContext.loadUser();
+    authContext.loadUser()
     // eslint-disable-next-line
-  }, []);
-
+  }, [])
   // Get Api search
   // useEffect(() => {
-  //   apiContext.searchDomain();
+  //   onSubmit()
   //   // eslint-disable-next-line
-  // });
+  // }, [])
 
-  const [text, setText] = useState('');
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (text === '') {
-      alertContext.setAlert('Please enter a value', 'light');
-    } else {
-      apiContext.searchDomain(text);
-      setText('');
-    }
-  };
-
-  const onChange = (e) => setText(e.target.value);
-  if (loading) return <Spinner />;
+  if (loading) return <Spinner />
 
   return (
     <div>
@@ -54,10 +46,9 @@ const Search = (contact) => {
         <input
           type='text'
           name='text'
-          placeholder='Search Users...'
+          placeholder='Search Domain...'
           value={text}
           onChange={onChange}
-          autoComplete='off'
         />
         <input
           type='submit'
@@ -74,33 +65,48 @@ const Search = (contact) => {
         </button>
       )}
 
-      <Fragment>
-        <table className='table'>
-          <thead>
-            <tr>
-              <th>Department</th>
-              <th>Position</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>State</th>
-            </tr>
-          </thead>
-          {first_name}
-        </table>
-      </Fragment>
+      <h1>{organization}</h1>
+      <table className='table'>
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Department</th>
+            <th>Position</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>LinkedIn</th>
+            <th>Twitter</th>
+          </tr>
+        </thead>
+
+        {contacts.map((e, index) => {
+          return (
+            <Fragment key={index}>
+              <tbody>
+                <tr>
+                  <td>{e.first_name}</td>
+                  <td>{e.last_name}</td>
+                  <td>{e.department}</td>
+                  <td>{e.position}</td>
+                  <td>{e.value}</td>
+                  <td>{e.phone_number}</td>
+                  <td>{e.linkedin}</td>
+                  <td>{e.twitter}</td>
+                </tr>
+              </tbody>
+            </Fragment>
+          )
+        })}
+      </table>
+
       <div>
         <a href='/' className='btn btn-info btn-lg active'>
           Return to Port
         </a>
       </div>
     </div>
-  );
-};
+  )
+}
 
-Search.protoTypes = {
-  contact: PropTypes.object.isRequired,
-};
-
-export default Search;
+export default Search
