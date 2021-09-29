@@ -11,11 +11,14 @@ import {
 const url = 'https://api.hunter.io/v2/domain-search?domain='
 
 let hunterioClientid
+let hunterioCientSecret
 
 if (process.env.NODE_ENV !== 'production') {
   hunterioClientid = process.env.REACT_APP_API_KEY
+  hunterioCientSecret = process.env.REACT_APP_JWTSECRET
 } else {
-  hunterioClientid = process.env.APPI_CLIENT_ID
+  hunterioClientid = process.env.API_KEY
+  hunterioCientSecret = process.env.JWTSECRET
 }
 
 const ApiState = (props) => {
