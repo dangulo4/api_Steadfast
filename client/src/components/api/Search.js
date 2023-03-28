@@ -25,7 +25,7 @@ const Search = () => {
 
   const onChange = (e) => setText(e.target.value)
 
-  const { organization } = company
+  const { organization, state } = company
 
   // Run as soon as component loads
   useEffect(() => {
@@ -65,7 +65,9 @@ const Search = () => {
         </button>
       )}
 
-      <h1>{organization}</h1>
+      <h1>
+        {organization}, {state}
+      </h1>
       <table className='table'>
         <thead>
           <tr>
